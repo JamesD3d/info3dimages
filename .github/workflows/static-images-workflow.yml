@@ -1,87 +1,47 @@
-name: Convert Static Images to AVIF
+name: Optimize Images to WebP
 
 on:
   push:
+    branches: [ main ] # Or your default branch
     paths:
-      - '**.png'
-      - '**.jpg'
-      - '**.jpeg'
-    branches: [ main, master ]
-  pull_request:
-    paths:
-      - '**.png'
-      - '**.jpg'
-      - '**.jpeg'
-  workflow_dispatch:
-
-permissions:
-  contents: write
-  pull-requests: write
+      - '**/*.png'
+      - '**/*.jpg'
+      - '**/*.jpeg'
+      - '**/*.gif'
+      - '**/*.tiff'
+      - '**/*.tif'
 
 jobs:
-  convert-static-images:
+  optimize:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Set up Git
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-      
-      - name: Create branch for changes
-        run: |
-          BRANCH_NAME="avif-conversion-$(date +%s)"
-          git checkout -b $BRANCH_NAME
-          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
-
-      - name: Install AVIF tools
+      - name: Set up dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libavif-bin
-      
-      - name: Convert PNG files to AVIF
+          sudo apt-get install -y webp
+
+      - name: Find and convert PNG/JPEG/TIFF to WebP
         run: |
-          find . -type f -name "*.png" | while read file; do
-            avif_file="${file%.png}.avif"
-            echo "Converting $file to $avif_file"
-            avifenc --min 0 --max 63 --speed 6 --jobs 2 "$file" "$avif_file"
-          done
-      
-      - name: Convert JPG/JPEG files to AVIF
-        run: |
-          find . -type f \( -name "*.jpg" -o -name "*.jpeg" \) | while read file; do
-            if [[ "$file" == *.jpg ]]; then
-              avif_file="${file%.jpg}.avif"
-            else
-              avif_file="${file%.jpeg}.avif"
-            fi
-            echo "Converting $file to $avif_file"
-            avifenc --min 0 --max 63 --speed 6 --jobs 2 "$file" "$avif_file"
+          find . -regex '.*\.\(png\|jpe?g\|tiff?\) -print0' | while IFS= read -r -d $'\0' file; do
+            output_file="${file%.*}.webp"
+            echo "Converting $file to $output_file"
+            cwebp "$file" -o "$output_file" # Adjust encoding settings as needed
           done
 
-      - name: Set up GitHub CLI
-        uses: cli/cli-action@v2
-      
-      - name: Commit changes and create PR
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Find and convert GIF to WebP
         run: |
-          git add "*.avif"
-          
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-            exit 0
-          fi
-          
-          git commit -m "Convert static images to AVIF format"
-          git push origin $BRANCH_NAME
-          
-          gh pr create --title "Convert static images to AVIF format" \
-                       --body "This PR adds AVIF versions of static images for better compression and quality." \
-                       --base main \
-                       --head $BRANCH_NAME
+          find . -name "*.gif" -print0 | while IFS= read -r -d $'\0' file; do
+            output_file="${file%.gif}.webp"
+            echo "Converting $file to $output_file"
+            gif2webp "$file" -o "$output_file" # Adjust encoding settings as needed
+          done
+
+      - name: Commit changes (Optional)
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Optimize images to WebP"
+          push_options: '--force-with-lease'
