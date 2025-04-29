@@ -1,4 +1,4 @@
-name: Convert Images to WebP/AVIF
+name: Optimize Images
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
       - name: Install required tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y webp libavif-bin imagemagick
+          sudo apt-get install -y webp libavif-bin imagemagick ffmpeg
       
       - name: Convert PNG files to WebP
         run: |
@@ -68,9 +68,6 @@ jobs:
             
             if [ "$is_animated" = "yes" ]; then
               echo "Converting animated $file to $avif_file"
-              # Install FFmpeg if not already installed
-              which ffmpeg || sudo apt-get install -y ffmpeg
-              
               # Convert animated GIF to AVIF using FFmpeg
               # CRF 23 is a good balance of quality and file size
               ffmpeg -i "$file" -c:v libaom-av1 -crf 23 -b:v 0 -strict experimental "$avif_file"
