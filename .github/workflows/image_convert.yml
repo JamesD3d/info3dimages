@@ -44,7 +44,9 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "GitHub Actions Bot"
-          git add "*.webp" # Ensure we are adding the WebP files
+          git add "*.webp"
           git commit -m "Optimize images to WebP [skip ci]"
-          git remote set-url origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+
+          git fetch origin
+          git rebase origin/main
           git push origin HEAD:${{ github.ref_name }}
