@@ -12,8 +12,11 @@ on:
       - '**.png'
       - '**.jpg'
       - '**.jpeg'
-  # Optional: Allow manual triggering
   workflow_dispatch:
+
+# Add permissions block to allow writing to the repository
+permissions:
+  contents: write
 
 jobs:
   convert-static-images:
