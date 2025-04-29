@@ -35,11 +35,10 @@ jobs:
       
       - name: Create branch for changes
         run: |
-          # Create a new branch for our changes
           BRANCH_NAME="avif-conversion-$(date +%s)"
           git checkout -b $BRANCH_NAME
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
-      
+
       - name: Install AVIF tools
         run: |
           sudo apt-get update
@@ -64,27 +63,24 @@ jobs:
             echo "Converting $file to $avif_file"
             avifenc --min 0 --max 63 --speed 6 --jobs 2 "$file" "$avif_file"
           done
+
+      - name: Set up GitHub CLI
+        uses: cli/cli-action@v2
       
       - name: Commit changes and create PR
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Add all AVIF files
           git add "*.avif"
           
-          # Check if there are changes to commit
           if git diff --staged --quiet; then
             echo "No changes to commit"
             exit 0
           fi
           
-          # Commit changes
           git commit -m "Convert static images to AVIF format"
-          
-          # Push branch to remote
           git push origin $BRANCH_NAME
           
-          # Create PR using GitHub CLI
           gh pr create --title "Convert static images to AVIF format" \
                        --body "This PR adds AVIF versions of static images for better compression and quality." \
                        --base main \
