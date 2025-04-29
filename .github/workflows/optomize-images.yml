@@ -1,4 +1,4 @@
-name: Optimize Images and Convert GIFs to WebP
+name: Optimize Images and Convert GIFs to WebP (No External Actions)
 
 on:
   push:
@@ -19,23 +19,22 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install tools
+      - name: Install optimization tools
         run: |
           sudo apt update
-          sudo apt install -y ffmpeg gifsicle
+          sudo apt install -y ffmpeg optipng jpegoptim gifsicle webp
 
-      - name: Report File Sizes Before
+      - name: Report File Sizes Before Optimization
         run: |
           echo "## 🧹 Original File Sizes" >> $GITHUB_STEP_SUMMARY
           find . -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" -o -iname "*.gif" \) -exec du -h {} + | sort -h >> $GITHUB_STEP_SUMMARY
 
-      - name: Optimize PNG, JPG, WebP Images
-        uses: calibreapp/image-actions@v1
-        with:
-          compressOnly: false
-          jpegQuality: 80
-          pngQuality: 80
-          webpQuality: 80
+      - name: Optimize PNG, JPG, and WebP Files
+        run: |
+          find . -type f -iname "*.png" -exec optipng -o7 {} \;
+          find . -type f -iname "*.jpg" -exec jpegoptim --strip-all --max=80 {} \;
+          find . -type f -iname "*.jpeg" -exec jpegoptim --strip-all --max=80 {} \;
+          find . -type f -iname "*.webp" -exec cwebp -q 80 {} -o {} \;
 
       - name: Convert GIFs to Animated WebP (keep originals)
         run: |
@@ -44,7 +43,7 @@ jobs:
             ffmpeg -i "$filename" -loop 0 "${filename%.gif}.webp"
           done
 
-      - name: Report File Sizes After
+      - name: Report File Sizes After Optimization
         run: |
           echo "## ✨ Optimized File Sizes" >> $GITHUB_STEP_SUMMARY
           find . -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" -o -iname "*.gif" \) -exec du -h {} + | sort -h >> $GITHUB_STEP_SUMMARY
