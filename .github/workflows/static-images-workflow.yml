@@ -14,9 +14,9 @@ on:
       - '**.jpeg'
   workflow_dispatch:
 
-# Add permissions block to allow writing to the repository
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   convert-static-images:
@@ -25,6 +25,20 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Git
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+      
+      - name: Create branch for changes
+        run: |
+          # Create a new branch for our changes
+          BRANCH_NAME="avif-conversion-$(date +%s)"
+          git checkout -b $BRANCH_NAME
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
       
       - name: Install AVIF tools
         run: |
@@ -51,9 +65,27 @@ jobs:
             avifenc --min 0 --max 63 --speed 6 --jobs 2 "$file" "$avif_file"
           done
       
-      - name: Commit and push changes
+      - name: Commit changes and create PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
+          # Add all AVIF files
           git add "*.avif"
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Convert static images to AVIF format [skip ci]" && git push)
+          
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          
+          # Commit changes
+          git commit -m "Convert static images to AVIF format"
+          
+          # Push branch to remote
+          git push origin $BRANCH_NAME
+          
+          # Create PR using GitHub CLI
+          gh pr create --title "Convert static images to AVIF format" \
+                       --body "This PR adds AVIF versions of static images for better compression and quality." \
+                       --base main \
+                       --head $BRANCH_NAME
