@@ -1,4 +1,4 @@
-name: Optimize Images and Convert GIFs to WebP (No External Actions)
+name: Optimize Images and Convert GIFs to WebP (no external actions)
 
 on:
   push:
