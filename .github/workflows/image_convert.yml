@@ -2,7 +2,7 @@ name: Optimize Images to WebP
 
 on:
   push:
-    branches: [ main ] # Or your default branch
+    branches: [ main ]
     paths:
       - '**/*.png'
       - '**/*.jpg'
@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history to prevent push conflicts
 
       - name: Set up dependencies
         run: |
@@ -26,10 +28,10 @@ jobs:
 
       - name: Find and convert PNG/JPEG/TIFF to WebP
         run: |
-          find . -regex '.*\.\(png\|jpe?g\|tiff?\) -print0' | while IFS= read -r -d $'\0' file; do
+          find . -regextype posix-extended -regex '.*\.(png|jpe?g|tiff?)' -print0 | while IFS= read -r -d $'\0' file; do
             output_file="${file%.*}.webp"
             echo "Converting $file to $output_file"
-            cwebp "$file" -o "$output_file" -q 80 # Adjust quality as needed
+            cwebp "$file" -o "$output_file" -q 80
           done
 
       - name: Find and convert GIF to WebP
@@ -37,16 +39,31 @@ jobs:
           find . -name "*.gif" -print0 | while IFS= read -r -d $'\0' file; do
             output_file="${file%.gif}.webp"
             echo "Converting $file to $output_file"
-            gif2webp "$file" -o "$output_file" -q 80 # Adjust quality as needed
+            gif2webp "$file" -o "$output_file" -q 80
           done
 
       - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "GitHub Actions Bot"
-          git add "*.webp"
-          git commit -m "Optimize images to WebP [skip ci]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global commit.gpgSign false
 
-          git fetch origin
-          git rebase origin/main
-          git push origin HEAD:${{ github.ref_name }}
+          # Secure remote push
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+
+          # Add new webp files safely
+          if find . -name "*.webp" | grep -q .; then
+            find . -name "*.webp" -exec git add {} +
+
+            if git diff --cached --quiet; then
+              echo "No new .webp files to commit"
+              exit 0
+            fi
+
+            git commit -m "Optimize images to WebP format [skip ci]"
+            git push origin HEAD
+          else
+            echo "No .webp files found. Skipping commit."
+          fi
