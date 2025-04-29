@@ -1,0 +1,58 @@
+name: Optimize Images and Convert GIFs to WebP
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.png'
+      - '**.jpg'
+      - '**.jpeg'
+      - '**.webp'
+      - '**.gif'
+
+jobs:
+  optimize_and_convert:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install tools
+        run: |
+          sudo apt update
+          sudo apt install -y ffmpeg gifsicle
+
+      - name: Report File Sizes Before
+        run: |
+          echo "## 🧹 Original File Sizes" >> $GITHUB_STEP_SUMMARY
+          find . -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" -o -iname "*.gif" \) -exec du -h {} + | sort -h >> $GITHUB_STEP_SUMMARY
+
+      - name: Optimize PNG, JPG, WebP Images
+        uses: calibreapp/image-actions@v1
+        with:
+          compressOnly: false
+          jpegQuality: 80
+          pngQuality: 80
+          webpQuality: 80
+
+      - name: Convert GIFs to Animated WebP (keep originals)
+        run: |
+          find . -type f -iname "*.gif" | while read filename; do
+            echo "Converting $filename to animated WebP..."
+            ffmpeg -i "$filename" -loop 0 "${filename%.gif}.webp"
+          done
+
+      - name: Report File Sizes After
+        run: |
+          echo "## ✨ Optimized File Sizes" >> $GITHUB_STEP_SUMMARY
+          find . -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" -o -iname "*.gif" \) -exec du -h {} + | sort -h >> $GITHUB_STEP_SUMMARY
+
+      - name: Commit Optimized and Converted Files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Optimize images and convert GIFs to WebP" || echo "No changes to commit"
+          git push
