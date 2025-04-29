@@ -1,0 +1,44 @@
+name: Convert Images to WebP
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.png'
+      - '**/*.jpg'
+      - '**/*.jpeg'
+      - '**/*.gif'
+
+jobs:
+  convert-to-webp:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install cwebp and gif2webp
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y webp
+
+      - name: Find and Convert PNG and JPEG to WebP
+        run: |
+          find . -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' \) | while read file; do
+            output="${file%.*}.webp"
+            cwebp -q 80 "$file" -o "$output"
+          done
+
+      - name: Find and Convert GIF to animated WebP
+        run: |
+          find . -type f -iname '*.gif' | while read file; do
+            output="${file%.*}.webp"
+            gif2webp "$file" -o "$output"
+          done
+
+      - name: Commit and Push Converted Files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Convert images to WebP format'
+          branch: main
+          file_pattern: '**/*.webp'
