@@ -1,89 +1,44 @@
-name: Optimize Images to WebP
+name: Convert Images to WebP
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
     paths:
       - '**/*.png'
       - '**/*.jpg'
       - '**/*.jpeg'
       - '**/*.gif'
-      - '**/*.tiff'
-      - '**/*.tif'
 
 jobs:
-  optimize:
+  convert-to-webp:
     runs-on: ubuntu-latest
-
-    env:
-      WEBP_QUALITY: 80 # Default quality
-      # Add more WebP options here if needed
-      # WEBP_COMPRESSION_METHOD: 6
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # full history to prevent push conflicts
 
-      - name: Set up dependencies
+      - name: Install cwebp and gif2webp
         run: |
           sudo apt-get update
           sudo apt-get install -y webp
 
-      - name: Find and convert PNG/JPEG/TIFF to WebP
-        id: convert_static
+      - name: Find and Convert PNG and JPEG to WebP
         run: |
-          find . -regextype posix-extended -regex '.*\.(png|jpe?g|tiff?)' -print0 | while IFS= read -r -d $'\0' file; do
-            output_file="${file%.*}.webp"
-            echo "Converting $file to $output_file with quality $WEBP_QUALITY"
-            cwebp "$file" -o "$output_file" -q "$WEBP_QUALITY" # Use env var
-            if [ $? -ne 0 ]; then
-              echo "::warning file=$file::Failed to convert $file to WebP"
-            fi
+          find . -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' \) | while read file; do
+            output="${file%.*}.webp"
+            cwebp -q 80 "$file" -o "$output"
           done
-        shell: bash
 
-      - name: Find and convert GIF to WebP
-        id: convert_gif
+      - name: Find and Convert GIF to animated WebP
         run: |
-          find . -name "*.gif" -print0 | while IFS= read -r -d $'\0' file; do
-            output_file="${file%.gif}.webp"
-            echo "Converting $file to $output_file with quality $WEBP_QUALITY"
-            gif2webp "$file" -o "$output_file" -q "$WEBP_QUALITY" # Use env var
-            if [ $? -ne 0 ]; then
-              echo "::warning file=$file::Failed to convert $file to WebP"
-            fi
+          find . -type f -iname '*.gif' | while read file; do
+            output="${file%.*}.webp"
+            gif2webp "$file" -o "$output"
           done
-        shell: bash
 
-      - name: Commit and push changes
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git config --global commit.gpgSign false
-
-          # Secure remote push
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-
-          # Add new webp files safely
-          if find . -name "*.webp" | grep -q .; then
-            find . -name "*.webp" -exec git add {} +
-
-            if git diff --cached --quiet; then
-              echo "No new .webp files to commit"
-              exit 0
-            fi
-
-            git commit -m "Optimize images to WebP format [skip ci]"
-            git push origin HEAD
-            if [ $? -ne 0 ]; then
-              echo "::error::Failed to push changes to the repository"
-              exit 1 # Fail the workflow
-            fi
-          else
-            echo "No .webp files found. Skipping commit."
-          fi
-        shell: bash
+      - name: Commit and Push Converted Files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Convert images to WebP format'
+          branch: main
+          file_pattern: '**/*.webp'
