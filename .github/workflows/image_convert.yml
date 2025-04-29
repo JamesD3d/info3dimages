@@ -15,6 +15,11 @@ jobs:
   optimize:
     runs-on: ubuntu-latest
 
+    env:
+      WEBP_QUALITY: 80 # Default quality
+      # Add more WebP options here if needed
+      # WEBP_COMPRESSION_METHOD: 6
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,20 +32,30 @@ jobs:
           sudo apt-get install -y webp
 
       - name: Find and convert PNG/JPEG/TIFF to WebP
+        id: convert_static
         run: |
           find . -regextype posix-extended -regex '.*\.(png|jpe?g|tiff?)' -print0 | while IFS= read -r -d $'\0' file; do
             output_file="${file%.*}.webp"
-            echo "Converting $file to $output_file"
-            cwebp "$file" -o "$output_file" -q 80
+            echo "Converting $file to $output_file with quality $WEBP_QUALITY"
+            cwebp "$file" -o "$output_file" -q "$WEBP_QUALITY" # Use env var
+            if [ $? -ne 0 ]; then
+              echo "::warning file=$file::Failed to convert $file to WebP"
+            fi
           done
+        shell: bash
 
       - name: Find and convert GIF to WebP
+        id: convert_gif
         run: |
           find . -name "*.gif" -print0 | while IFS= read -r -d $'\0' file; do
             output_file="${file%.gif}.webp"
-            echo "Converting $file to $output_file"
-            gif2webp "$file" -o "$output_file" -q 80
+            echo "Converting $file to $output_file with quality $WEBP_QUALITY"
+            gif2webp "$file" -o "$output_file" -q "$WEBP_QUALITY" # Use env var
+            if [ $? -ne 0 ]; then
+              echo "::warning file=$file::Failed to convert $file to WebP"
+            fi
           done
+        shell: bash
 
       - name: Commit and push changes
         env:
@@ -64,6 +79,11 @@ jobs:
 
             git commit -m "Optimize images to WebP format [skip ci]"
             git push origin HEAD
+            if [ $? -ne 0 ]; then
+              echo "::error::Failed to push changes to the repository"
+              exit 1 # Fail the workflow
+            fi
           else
             echo "No .webp files found. Skipping commit."
           fi
+        shell: bash
