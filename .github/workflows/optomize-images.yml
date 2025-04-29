@@ -1,57 +1,88 @@
-name: Optimize Images and Convert GIFs to WebP (no external actions)
+name: Convert Images to WebP/AVIF
 
 on:
   push:
-    branches:
-      - main
     paths:
       - '**.png'
-      - '**.jpg'
-      - '**.jpeg'
-      - '**.webp'
       - '**.gif'
+    branches: [ main, master ]
+  pull_request:
+    paths:
+      - '**.png'
+      - '**.gif'
+  # Optional: Allow manual triggering
+  workflow_dispatch:
 
 jobs:
-  optimize_and_convert:
+  convert-images:
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Install optimization tools
+      
+      - name: Install required tools
         run: |
-          sudo apt update
-          sudo apt install -y ffmpeg optipng jpegoptim gifsicle webp
-
-      - name: Report File Sizes Before Optimization
+          sudo apt-get update
+          sudo apt-get install -y webp libavif-bin imagemagick
+      
+      - name: Convert PNG files to WebP
         run: |
-          echo "## 🧹 Original File Sizes" >> $GITHUB_STEP_SUMMARY
-          find . -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" -o -iname "*.gif" \) -exec du -h {} + | sort -h >> $GITHUB_STEP_SUMMARY
-
-      - name: Optimize PNG, JPG, and WebP Files
-        run: |
-          find . -type f -iname "*.png" -exec optipng -o7 {} \;
-          find . -type f -iname "*.jpg" -exec jpegoptim --strip-all --max=80 {} \;
-          find . -type f -iname "*.jpeg" -exec jpegoptim --strip-all --max=80 {} \;
-          find . -type f -iname "*.webp" -exec cwebp -q 80 {} -o {} \;
-
-      - name: Convert GIFs to Animated WebP (keep originals)
-        run: |
-          find . -type f -iname "*.gif" | while read filename; do
-            echo "Converting $filename to animated WebP..."
-            ffmpeg -i "$filename" -loop 0 "${filename%.gif}.webp"
+          find . -type f -name "*.png" | while read file; do
+            webp_file="${file%.png}.webp"
+            echo "Converting $file to $webp_file"
+            cwebp -q 90 "$file" -o "$webp_file"
           done
-
-      - name: Report File Sizes After Optimization
+      
+      - name: Convert GIF files to WebP (preserving animation)
         run: |
-          echo "## ✨ Optimized File Sizes" >> $GITHUB_STEP_SUMMARY
-          find . -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" -o -iname "*.gif" \) -exec du -h {} + | sort -h >> $GITHUB_STEP_SUMMARY
-
-      - name: Commit Optimized and Converted Files
+          find . -type f -name "*.gif" | while read file; do
+            # Check if the GIF is animated
+            is_animated=$(identify -format "%n" "$file" | awk '{if ($1 > 1) print "yes"; else print "no"}')
+            webp_file="${file%.gif}.webp"
+            
+            echo "Converting $file to $webp_file"
+            if [ "$is_animated" = "yes" ]; then
+              # For animated GIFs, use gif2webp to preserve animation
+              gif2webp -q 90 "$file" -o "$webp_file"
+            else
+              # For static GIFs, use cwebp
+              cwebp -q 90 "$file" -o "$webp_file"
+            fi
+          done
+      
+      - name: Convert PNG files to AVIF
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add .
-          git commit -m "Optimize images and convert GIFs to WebP" || echo "No changes to commit"
-          git push
+          find . -type f -name "*.png" | while read file; do
+            avif_file="${file%.png}.avif"
+            echo "Converting $file to $avif_file"
+            avifenc --min 0 --max 63 --speed 6 --jobs 2 "$file" "$avif_file"
+          done
+      
+      - name: Convert GIF files to AVIF (including animations)
+        run: |
+          find . -type f -name "*.gif" | while read file; do
+            # Check if the GIF is animated
+            is_animated=$(identify -format "%n" "$file" | awk '{if ($1 > 1) print "yes"; else print "no"}')
+            avif_file="${file%.gif}.avif"
+            
+            if [ "$is_animated" = "yes" ]; then
+              echo "Converting animated $file to $avif_file"
+              # Install FFmpeg if not already installed
+              which ffmpeg || sudo apt-get install -y ffmpeg
+              
+              # Convert animated GIF to AVIF using FFmpeg
+              # CRF 23 is a good balance of quality and file size
+              ffmpeg -i "$file" -c:v libaom-av1 -crf 23 -b:v 0 -strict experimental "$avif_file"
+            else
+              echo "Converting static $file to $avif_file"
+              avifenc --min 0 --max 63 --speed 6 --jobs 2 "$file" "$avif_file"
+            fi
+          done
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add *.webp *.avif
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Convert images to WebP/AVIF formats [skip ci]" && git push)
