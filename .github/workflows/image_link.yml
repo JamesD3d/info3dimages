@@ -1,0 +1,40 @@
+name: Generate jsDelivr Markdown Image Links
+
+on:
+  push:
+    paths:
+      - 'i/**'  # Only trigger when files in /i are changed
+
+jobs:
+  generate-links:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Generate IMAGE_LINKS.md with markdown image embeds
+        run: |
+          echo "# 🖼️ Auto-generated Image CDN Links" > IMAGE_LINKS.md
+          echo "" >> IMAGE_LINKS.md
+
+          find i/ -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" -o -iname "*.gif" \) | sort | while read file; do
+            FILENAME=$(basename "$file")
+            IMAGE_URL="https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/${file}"
+            echo "![${FILENAME}](${IMAGE_URL})" >> IMAGE_LINKS.md
+            echo "" >> IMAGE_LINKS.md
+          done
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+          git add IMAGE_LINKS.md
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "🔄 Auto-update IMAGE_LINKS.md with markdown image links"
+            git push
+          fi
