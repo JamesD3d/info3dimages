@@ -1,9 +1,9 @@
-name: Generate jsDelivr Markdown Image Links
+name: Generate jsDelivr Markdown WebP Image Links
 
 on:
   push:
     paths:
-      - 'i/**'  # Only trigger when files in /i are changed
+      - 'i/**'  # Only run when image files are pushed or modified
 
 jobs:
   generate-links:
@@ -13,12 +13,12 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v4
 
-      - name: Generate IMAGE_LINKS.md with markdown image embeds
+      - name: Generate IMAGE_LINKS.md (WebP only)
         run: |
-          echo "# 🖼️ Auto-generated Image CDN Links" > IMAGE_LINKS.md
+          echo "# 🖼️ Auto-generated WebP CDN Image Links" > IMAGE_LINKS.md
           echo "" >> IMAGE_LINKS.md
 
-          find i/ -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" -o -iname "*.gif" \) | sort | while read file; do
+          find i/ -type f -iname "*.webp" | sort | while read file; do
             FILENAME=$(basename "$file")
             IMAGE_URL="https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/${file}"
             echo "![${FILENAME}](${IMAGE_URL})" >> IMAGE_LINKS.md
@@ -35,6 +35,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "🔄 Auto-update IMAGE_LINKS.md with markdown image links"
+            git commit -m "🔄 Auto-update IMAGE_LINKS.md with WebP links only"
             git push
           fi
