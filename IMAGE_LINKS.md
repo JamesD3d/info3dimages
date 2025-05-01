@@ -1,5 +1,4 @@
-# 🖼️ Auto-generated Image CDN Links
-
+# 🖼️ Auto-generated WebP CDN Image Links
 
 ![CGTrader.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/3d_Files_Sources/CGTrader.webp)
 
@@ -78,3 +77,4 @@
 ![orca-slicer_ha22NGmQjn.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Limmitiaions/orca-slicer_ha22NGmQjn.webp)
 
 ![fav_icon.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/index/fav_icon.webp)
+
