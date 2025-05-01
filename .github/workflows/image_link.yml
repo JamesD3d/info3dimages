@@ -22,7 +22,9 @@ jobs:
 
           find i/ -type f -iname "*.webp" | sort | while read file; do
             FILENAME=$(basename "$file")
-            IMAGE_URL="https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/${file}"
+            # Replace spaces with %20 for valid URLs
+            ENCODED_PATH=$(echo "$file" | sed 's/ /%20/g')
+            IMAGE_URL="https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/${ENCODED_PATH}"
             echo "![${FILENAME}](${IMAGE_URL})" >> IMAGE_LINKS.md
             echo "" >> IMAGE_LINKS.md
           done
@@ -36,6 +38,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "🔄 Auto-update IMAGE_LINKS.md with WebP links only"
+            git commit -m "🔄 Auto-update IMAGE_LINKS.md with WebP links only (URL-encoded)"
             git push
           fi
