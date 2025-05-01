@@ -1,12 +1,14 @@
 name: Generate jsDelivr Markdown WebP Image Links
 
 on:
-  push:
-    paths:
-      - 'i/**'  # Only run when image files are pushed or modified
+  workflow_run:
+    workflows: ["Convert Images to WebP"]
+    types:
+      - completed
 
 jobs:
   generate-links:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -29,7 +31,6 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-
           git add IMAGE_LINKS.md
 
           if git diff --cached --quiet; then

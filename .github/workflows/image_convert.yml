@@ -22,23 +22,23 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y webp
 
-      - name: Find and Convert PNG and JPEG to WebP
+      - name: Convert PNG/JPG to WebP and delete originals
         run: |
           find . -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' \) | while read file; do
             output="${file%.*}.webp"
-            cwebp -q 80 "$file" -o "$output"
+            cwebp -q 80 "$file" -o "$output" && rm "$file"
           done
 
-      - name: Find and Convert GIF to animated WebP
+      - name: Convert GIF to animated WebP and delete originals
         run: |
           find . -type f -iname '*.gif' | while read file; do
             output="${file%.*}.webp"
-            gif2webp "$file" -o "$output"
+            gif2webp "$file" -o "$output" && rm "$file"
           done
 
       - name: Commit and Push Converted Files
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'Convert images to WebP format'
+          commit_message: 'Convert images to WebP format and remove originals'
           branch: main
           file_pattern: '**/*.webp'
