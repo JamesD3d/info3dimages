@@ -48,6 +48,10 @@
 
 ![klipper.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Control/Firmware/klipper.webp)
 
+![Bambu Lab A1_cover.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Hardware-Definitions/Bambu Lab A1_cover.webp)
+
+![Bambu Lab X1 Carbon_cover.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Hardware-Definitions/Bambu Lab X1 Carbon_cover.webp)
+
 ![Nozzle.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Hardware-Definitions/Nozzle.webp)
 
 ![carterage1.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Hardware-Definitions/carterage1.webp)
@@ -66,6 +70,8 @@
 
 ![partcooling.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Hardware-Definitions/partcooling.webp)
 
+![termistor.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Hardware-Definitions/termistor.webp)
+
 ![orca-slicer_HTNPG0TVTR.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Limmitiaions/orca-slicer_HTNPG0TVTR.webp)
 
 ![orca-slicer_JW9THXVBK6.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Limmitiaions/orca-slicer_JW9THXVBK6.webp)
@@ -75,6 +81,8 @@
 ![orca-slicer_YvE0fYvlS6.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Limmitiaions/orca-slicer_YvE0fYvlS6.webp)
 
 ![orca-slicer_ha22NGmQjn.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Limmitiaions/orca-slicer_ha22NGmQjn.webp)
+
+![nozzle2.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Nozzles/nozzle2.webp)
 
 ![fav_icon.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/index/fav_icon.webp)
 
