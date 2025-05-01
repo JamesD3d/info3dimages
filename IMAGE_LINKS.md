@@ -48,9 +48,9 @@
 
 ![klipper.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Control/Firmware/klipper.webp)
 
-![Bambu Lab A1_cover.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Hardware-Definitions/Bambu Lab A1_cover.webp)
+![Bambu Lab A1_cover.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Hardware-Definitions/Bambu_Lab_A1_cover.webp)
 
-![Bambu Lab X1 Carbon_cover.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Hardware-Definitions/Bambu Lab X1 Carbon_cover.webp)
+![Bambu Lab X1 Carbon_cover.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Hardware-Definitions/Bambu_Lab_X1_Carbon_cover.webp)
 
 ![Nozzle.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Hardware-Definitions/Nozzle.webp)
 
