@@ -48,9 +48,11 @@
 
 ![klipper.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Control/Firmware/klipper.webp)
 
-![Bambu Lab A1_cover.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Hardware-Definitions/Bambu_Lab_A1_cover.webp)
+![Bambu Lab X1 Carbon_cover.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Hardware-Definitions/Bambu%20Lab%20X1%20Carbon_cover.webp)
 
-![Bambu Lab X1 Carbon_cover.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Hardware-Definitions/Bambu_Lab_X1_Carbon_cover.webp)
+![Bambu_Lab_A1_cover.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Hardware-Definitions/Bambu_Lab_A1_cover.webp)
+
+![Bambu_Lab_X1_Carbon_cover.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Hardware-Definitions/Bambu_Lab_X1_Carbon_cover.webp)
 
 ![Nozzle.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Hardware-Definitions/Nozzle.webp)
 
@@ -83,6 +85,28 @@
 ![orca-slicer_ha22NGmQjn.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Limmitiaions/orca-slicer_ha22NGmQjn.webp)
 
 ![nozzle2.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Nozzles/nozzle2.webp)
+
+![bambu-studio_crkDTolfok.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/SLICERS/bambu-studio_crkDTolfok.webp)
+
+![chrome_AnEeQQzcDm.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/SLICERS/chrome_AnEeQQzcDm.webp)
+
+![chrome_JVfMpuc9M0.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/SLICERS/chrome_JVfMpuc9M0.webp)
+
+![chrome_UC8JpW3Uof.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/SLICERS/chrome_UC8JpW3Uof.webp)
+
+![chrome_Zq0luVYb1g.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/SLICERS/chrome_Zq0luVYb1g.webp)
+
+![chrome_bHU0AGn3yC.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/SLICERS/chrome_bHU0AGn3yC.webp)
+
+![chrome_iOqPTXY2QW.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/SLICERS/chrome_iOqPTXY2QW.webp)
+
+![chrome_oX9cQ0Z0Tw.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/SLICERS/chrome_oX9cQ0Z0Tw.webp)
+
+![chrome_rx8Ydytvle.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/SLICERS/chrome_rx8Ydytvle.webp)
+
+![orca-slicer_5oMNQWZKJg.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/SLICERS/orca-slicer_5oMNQWZKJg.webp)
+
+![prusa-slicer_V2QSYXZBhE.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/SLICERS/prusa-slicer_V2QSYXZBhE.webp)
 
 ![fav_icon.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/index/fav_icon.webp)
 
