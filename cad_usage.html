@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>CAD Usage Pie Chart</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {packages:['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['CAD Software', 'Usage'],
+          ['SolidWorks', 35],
+          ['AutoCAD', 25],
+          ['Fusion 360', 10],
+          ['Creo', 8],
+          ['Onshape', 5],
+          ['FreeCAD', 3],
+          ['SolveSpace', 1],
+          ['DesignSpark Mechanical', 1]
+        ]);
+
+        var options = {
+          title: 'CAD Software Industry Usage (2025)',
+          pieHole: 0.4,
+          colors: ['#4285F4', '#DB4437', '#F4B400', '#0F9D58', '#AB47BC', '#00ACC1', '#FF7043', '#9E9D24']
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="piechart" style="width: 600px; height: 400px;"></div>
+  </body>
+</html>
