@@ -48,6 +48,8 @@
 
 ![klipper.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Control/Firmware/klipper.webp)
 
+![tinkercad teacher.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Lesson_Plans/Introduction_to_3d_design/tinkercad%20teacher.webp)
+
 ![Bambu Lab X1 Carbon_cover.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Hardware-Definitions/Bambu%20Lab%20X1%20Carbon_cover.webp)
 
 ![Bambu_Lab_A1_cover.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Hardware-Definitions/Bambu_Lab_A1_cover.webp)
@@ -85,6 +87,72 @@
 ![orca-slicer_ha22NGmQjn.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Limmitiaions/orca-slicer_ha22NGmQjn.webp)
 
 ![nozzle2.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Nozzles/nozzle2.webp)
+
+![OBJ.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/OBJ.webp)
+
+![STL.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/STL.webp)
+
+![3dVIEWER.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Other_Useful/3dVIEWER.webp)
+
+![GIMP.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Other_Useful/GIMP.webp)
+
+![INKSCAPES.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Other_Useful/INKSCAPES.webp)
+
+![LUBAN3D.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Other_Useful/LUBAN3D.webp)
+
+![OpenSCAD.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Other_Useful/OpenSCAD.webp)
+
+![3dXtech.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/3dXtech.webp)
+
+![Anycubic.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/Anycubic.webp)
+
+![BambuStore.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/BambuStore.webp)
+
+![Bestbuy.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/Bestbuy.webp)
+
+![Creality Store.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/Creality%20Store.webp)
+
+![FLSUN.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/FLSUN.webp)
+
+![Fabreeko.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/Fabreeko.webp)
+
+![FlashForge.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/FlashForge.webp)
+
+![KB3d.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/KB3d.webp)
+
+![MatterHackers.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/MatterHackers.webp)
+
+![MicroCenter.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/MicroCenter.webp)
+
+![Modix.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/Modix.webp)
+
+![Raise3dstore.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/Raise3dstore.webp)
+
+![SolvoStore.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/SolvoStore.webp)
+
+![UltimakerStore.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/UltimakerStore.webp)
+
+![VisonMinor.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/VisonMinor.webp)
+
+![amazon-main-logo-symbol-black-and-orange-1.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/amazon-main-logo-symbol-black-and-orange-1.webp)
+
+![elegoostore.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/elegoostore.webp)
+
+![markforged.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/markforged.webp)
+
+![prusaStore.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/prusaStore.webp)
+
+![west3d.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Manufactures/west3d.webp)
+
+![Marlin.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/Marlin.webp)
+
+![ReoRap Firmware.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/ReoRap%20Firmware.webp)
+
+![west3d.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/west3d.webp)
+
+![SETTINGS.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/SLICERS/SETTINGS.webp)
+
+![TreevsStandatrd.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/SLICERS/TreevsStandatrd.webp)
 
 ![bambu-studio_crkDTolfok.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/SLICERS/bambu-studio_crkDTolfok.webp)
 
