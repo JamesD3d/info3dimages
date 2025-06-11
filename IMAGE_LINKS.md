@@ -150,6 +150,8 @@
 
 ![west3d.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Printers/west3d.webp)
 
+![SETTINGS.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/SETTINGS.webp)
+
 ![SETTINGS.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/SLICERS/SETTINGS.webp)
 
 ![TreevsStandatrd.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/SLICERS/TreevsStandatrd.webp)
