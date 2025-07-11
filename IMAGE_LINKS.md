@@ -48,6 +48,8 @@
 
 ![klipper.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Control/Firmware/klipper.webp)
 
+![Filiment profile.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Filiment%20profile.webp)
+
 ![tinkercad teacher.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Lesson_Plans/Introduction_to_3d_design/tinkercad%20teacher.webp)
 
 ![Bambu Lab X1 Carbon_cover.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/Mechanical/Hardware-Definitions/Bambu%20Lab%20X1%20Carbon_cover.webp)
@@ -368,5 +370,19 @@
 
 ![unnamed.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/YOUTUBE/unnamed.webp)
 
+![bambufiliment.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/bambufiliment.webp)
+
+![chrome_UYw4KS9Pm2.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/chrome_UYw4KS9Pm2.webp)
+
+![chrome_yGzXGtQbUr.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/chrome_yGzXGtQbUr.webp)
+
 ![fav_icon.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/index/fav_icon.webp)
+
+![orcasettings.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/orcasettings.webp)
+
+![plasupportpetg.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/plasupportpetg.webp)
+
+![prusa filiment.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/prusa%20filiment.webp)
+
+![simplify3d.webp](https://cdn.jsdelivr.net/gh/JamesD3d/info3dimages@main/i/simplify3d.webp)
 
